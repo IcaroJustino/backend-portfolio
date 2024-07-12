@@ -1,14 +1,15 @@
 import { Controller, Get, Post, Body, Param, Put, Delete } from '@nestjs/common';
 import { ProjectService } from './project.service';
 import { Project } from '@prisma/client';
-
+import { ProjectDTO } from './project-dto';
+//TESTE
 @Controller('projects')
 export class ProjectController {
   constructor(private readonly projectService: ProjectService) {}
 
   @Post()
-  async createProject(@Body() data: any): Promise<Project> {
-    return this.projectService.createProject(data);
+  async createProject(@Body() project: ProjectDTO): Promise<Project> {
+    return this.projectService.createProject(project);
   }
 
   @Get()

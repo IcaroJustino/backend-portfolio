@@ -1,12 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { Project_Technologies, Prisma } from '@prisma/client';
+import { ProjectTechDto } from './project-tech-dto';
 
 @Injectable()
 export class ProjectTechnologiesService {
   constructor(private prisma: PrismaService) {}
 
-  async createProjectTechnology(data: Prisma.Project_TechnologiesCreateInput): Promise<Project_Technologies> {
+  async createProjectTechnology(data: ProjectTechDto): Promise<Project_Technologies> {
     return this.prisma.project_Technologies.create({
       data,
     });

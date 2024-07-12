@@ -1,13 +1,14 @@
 import { Controller, Get, Post, Body, Param, Put, Delete } from '@nestjs/common';
 import { ProjectTechnologiesService } from './project-technologies.service';
 import { Project_Technologies } from '@prisma/client';
+import { ProjectTechDto } from './project-tech-dto';
 
 @Controller('project-technologies')
 export class ProjectTechnologiesController {
   constructor(private readonly projectTechnologiesService: ProjectTechnologiesService) {}
 
   @Post()
-  async createProjectTechnology(@Body() data: any): Promise<Project_Technologies> {
+  async createProjectTechnology(@Body() data: ProjectTechDto): Promise<Project_Technologies> {
     return this.projectTechnologiesService.createProjectTechnology(data);
   }
 

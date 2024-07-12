@@ -1,12 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { Tech_Knolege, Prisma } from '@prisma/client';
+import { TehKnolegeDto } from './tech-knolege-dto';
 
 @Injectable()
 export class TechKnolegeService {
   constructor(private prisma: PrismaService) {}
 
-  async createTechKnolege(data: Prisma.Tech_KnolegeCreateInput): Promise<Tech_Knolege> {
+  async createTechKnolege(data: TehKnolegeDto): Promise<Tech_Knolege> {
     return this.prisma.tech_Knolege.create({
       data,
     });
