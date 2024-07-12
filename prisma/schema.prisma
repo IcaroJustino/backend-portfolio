@@ -1,0 +1,69 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id          String         @id @default(uuid())
+  fullname    String
+  email       String         @unique
+  github      String
+  instagram   String?
+  twitter     String?
+  bio         String?
+  biotitle    String?
+  avatar      String?
+  projects    Project[]
+  Experiences Experience[]
+  Knoleges    Tech_Knolege[]
+}
+
+model Experience {
+  id          String   @id @default(uuid())
+  title       String   @unique
+  description String?
+  start_date  DateTime
+  end_date    DateTime
+  userId      String
+  User        User     @relation(fields: [userId], references: [id])
+}
+
+model Tech_Knolege {
+  id     String @id @default(uuid())
+  title  String @unique
+  icon   String
+  userId String
+  User   User   @relation(fields: [userId], references: [id])
+}
+
+model Project {
+  id                   String                 @id @default(uuid())
+  title                String
+  description          String?
+  thumbnail            String?
+  link_github          String
+  link_deploy          String?
+  createdAt            DateTime               @default(now())
+  updatedAt            DateTime               @updatedAt
+  userId               String
+  developer            User                   @relation(fields: [userId], references: [id])
+  Project_Technologies Project_Technologies[]
+}
+
+model Project_Technologies {
+  id        String  @id @default(uuid())
+  icon      String
+  Name      String
+  ProjectId String
+  projects  Project @relation(fields: [ProjectId], references: [id])
+}
