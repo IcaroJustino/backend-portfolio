@@ -48,6 +48,9 @@ web_modules/
 # TypeScript cache
 *.tsbuildinfo
 
+#prisma test
+prisma/migrations/*
+dev.db
 # Optional npm cache directory
 .npm
 

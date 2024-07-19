@@ -1,13 +1,14 @@
 import { Controller, Get, Post, Body, Param, Put, Delete } from '@nestjs/common';
 import { ExperienceService } from './experience.service';
 import { Experience } from '@prisma/client';
+import { ExperienceDto } from './experience-dto';
 
 @Controller('experiences')
 export class ExperienceController {
   constructor(private readonly experienceService: ExperienceService) {}
 
   @Post()
-  async createExperience(@Body() data: any): Promise<Experience> {
+  async createExperience(@Body() data: ExperienceDto): Promise<Experience> {
     return this.experienceService.createExperience(data);
   }
 

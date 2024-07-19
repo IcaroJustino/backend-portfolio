@@ -1,12 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { Experience, Prisma } from '@prisma/client';
+import { ExperienceDto } from './experience-dto';
 
 @Injectable()
 export class ExperienceService {
   constructor(private prisma: PrismaService) {}
 
-  async createExperience(data: Prisma.ExperienceCreateInput): Promise<Experience> {
+  async createExperience(data: ExperienceDto): Promise<Experience> {
     return this.prisma.experience.create({
       data,
     });
